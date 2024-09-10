@@ -1,0 +1,3 @@
+<launch>
+  <node name="trot_gait_controller" pkg="quadruped_gait" type="gait_controller.py" output="screen"/>
+</launch>
