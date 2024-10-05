@@ -36,7 +36,7 @@ int main(void)
         if (Sensor_IsObstacle(distance)) {
             Motor_Stop();
             HAL_Delay(200);
-            // Simple avoidance: reverse + turn right
+            // FIXME: 避障策略太简单，有时候会撞到斜向障碍物
             Motor_SetSpeed(-300, 300);
             HAL_Delay(400);
             continue;

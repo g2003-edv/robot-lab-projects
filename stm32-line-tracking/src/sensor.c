@@ -36,10 +36,10 @@ void Sensor_ReadIR(Sensor_Data *data)
 
 float Sensor_ReadUltrasonic(void)
 {
-    // HC-SR04 超声波测距逻辑（简化框架）
-    // 实际实现需配置 TRIG 和 ECHO GPIO + TIM 捕获
-    // 返回距离：distance = duration * 0.034 / 2 (cm)
-    return 30.0f; // placeholder
+    // HC-SR04 超声波测距
+    // TODO: 需补充TRIG触发和ECHO输入捕获，当前只读了框架
+    // 实际距离 = 高电平时间(us) * 0.034 / 2
+    return 30.0f;
 }
 
 uint8_t Sensor_IsObstacle(float distance)
