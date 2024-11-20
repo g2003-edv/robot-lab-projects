@@ -27,18 +27,14 @@ class QuadrupedKinematics:
         return np.array([x, y, z])
 
     def inverse_kinematics(self, leg_id, x, y, z):
-        """
-        Inverse kinematics for one leg.
-        Given foot tip position (x, y, z), compute joint angles.
-        Returns (theta1, theta2, theta3) or None if unreachable.
-        """
+        """解析法逆解，给定足端位置求关节角"""
         try:
             theta1 = np.arctan2(y, x)
             r = np.sqrt(x**2 + y**2) - self.L1
             d = np.sqrt(r**2 + z**2)
 
             if d > (self.L2 + self.L3) or d < abs(self.L2 - self.L3):
-                return None  # Unreachable
+                return None
 
             cos_theta3 = (r**2 + z**2 - self.L2**2 - self.L3**2) / (2 * self.L2 * self.L3)
             theta3 = -np.arccos(np.clip(cos_theta3, -1.0, 1.0))
@@ -47,6 +43,7 @@ class QuadrupedKinematics:
             beta = np.arccos(np.clip((self.L2**2 + d**2 - self.L3**2) / (2 * self.L2 * d), -1.0, 1.0))
             theta2 = alpha + beta
 
+            # FIXME: 未加关节角度限幅，可能超出舵机物理范围
             return (theta1, theta2, theta3)
         except Exception:
             return None

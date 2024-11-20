@@ -68,7 +68,8 @@ class TrotGaitController:
             # IK to joint angles
             joint_angles = self.kin.inverse_kinematics(leg_idx, fx, 0.0, fz)
             if joint_angles is None:
-                joint_angles = (0.0, -0.3, 0.6)  # fallback neutral pose
+                # TODO: 逆解无解时应加角度限幅而非直接fallback
+                joint_angles = (0.0, -0.3, 0.6)
             angles.extend(joint_angles)
 
         return angles
