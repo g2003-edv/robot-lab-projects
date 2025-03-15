@@ -21,6 +21,7 @@ int main(void)
     HAL_Init();
     SystemClock_Config();
     MX_TIM2_Init();
+    // 初始化时电机可能会抖动一下，后来加了上电延时解决
 
     Motor_Init(&htim2);
     Sensor_Init();
